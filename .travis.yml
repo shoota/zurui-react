@@ -1,0 +1,36 @@
+sudo: false
+cache:
+  yarn: true
+  directories:
+  - node_modules
+language: node_js
+node_js: lts/*
+env:
+  global:
+  - secure: UOn/gD/ZnFFG+YEckEjQ6NXropaeSL+9FEwwQHXxuWzuHOdOF2cRP1m9dpSdEe692oK6/L00ruxwHKn3V07/56rNNEPm97Q3uJnYQcEMl+ZJLYko0JC7Ibs80MMnLaPrVmtZPVR0aadV8TpKCDfAShYxQpFWmaRwnaq2mAnBbmAm73HRznILeWMYqpmYuamLRBQaQMUUM1JAl9lHSBU09BEW9QXT0dfuBel4Rt1sYjvYlBRQZYE9hK8c6Dy/lkTq5TaY3d6oPQJdxIFvuUafsmyGg5SUvfWghSyyT17shZs4/dL3FzKZVnVav4GTu3z4cFJiOZj7rT1pjsO/Q1fhJyABX/ikHNpI9fpe3ph4tme5o6KcDMqvaejyxc7+tCP83ITM5y2C5t+MNF3ra2vj0k6BBB0BNr/VB34qEvBjZ0T7GqoafIskKUoXL1kLLkfklXDZwNhBm8nrqTVat7xxQ3iauPYuiab67rBm6MmTpdPEtwl3YDt4kodtPlDe26OK6t7+hQaHtiA18y4ATVWGDIBUNF+yxirMdTZwULy6LcMno2KNwCHUo4AHQRodVajUJcWhGUU+DHfMtBnfkx1X8r1rquDa7ZL6C62Av/pU/3lFeXaOh55J8W5E9eqseM10yXcbW2EjCfP+0cXtQuZk5mjGOuXxGVS30i1T9sb5p1o=
+  - secure: pcSuAMy8XCWW3YtqlPk7ov2WMeapVUpn9nT23CRCubHfp7guI0sMAoipNtQ4oUZQPJf65pksJ0hrB6cUMVVk/h12KHgowUcCnacOSecbl9c4aTlfxo7zUV68CStzfKG9j3RdHw0j0uMG5in9e6bd+dEqkUa+258tQR2e0n9ENG0ltfqgWxPnSFDUF692O5+csuwKnxaqQ/RESPvPnRVq7geuov9+ymqLLWimuqq5qHqReALFGiIdM/o22gd0QcdfUgs6SCKtOnWGC+Fhn0go3Gp4AH9tc7DZOmnN4kCOuNuGuhnUjBBmJ/cOQqMeTwOo0EFNmyYEB2/3St7c/EcJ9dO4EJJa/xdR9NXeKTfKcXO6luO6l71QtvIY1gIFdPIlaG4UelY/BBKpsR25POXUq/Su91y5MsMzPNjCoFveV+wImICOjqfCqjxjEX861tkq1coGlBnR685RA7uUsiA2SiXDxgAv19KiYAX+Zn1I6t+TGrFnDHN8WSMQk9L7da+AFIVevg8i9ZSaaVag67oBGH+xCrqd27RU+etN3qH4noutvQWHbtIrBTq0nSuyOIJh5zb6Zn6LLF/NRL0ed+ZG1woY2g2EPqqFaexXBReidxqEom4+MxgoISNhERw0kgTUJIr9EnCcjV1pPwMc1UeJNnFknoOyLLbUABYcVZ/CuCY=
+stages:
+- test
+- name: deploy
+jobs:
+  include:
+  - stage: test
+    env: lint
+    script:
+    - yarn lint
+  - stage: test
+    env: Test
+    script:
+    - yarn test
+  - stage: deploy
+    env: gh-page
+    script:
+    - yarn build-storybook
+    deploy:
+      provider: pages
+      skip-cleanup: true
+      github-token: "$GITHUB_TOKEN"
+      keep-history: true
+      local-dir: storybook-static
+      on:
+        branch: master
