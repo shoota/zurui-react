@@ -45,7 +45,7 @@
     "jest": "23.6.0",
     "lint-staged": "8.0.4",
     "prettier": "1.15.2",
-    "react-test-renderer": "16.6.1",
+    "react-test-renderer": "16.6.3",
     "ts-jest": "23.10.4",
     "ts-node": "7.0.1",
     "tslint": "5.11.0",
@@ -54,8 +54,8 @@
     "typescript": "3.1.6"
   },
   "dependencies": {
-    "react": "16.6.1",
-    "react-dom": "16.6.1",
+    "react": "16.6.3",
+    "react-dom": "16.6.3",
     "styled-components": "4.1.1",
     "tslint-react": "3.6.0"
   },
