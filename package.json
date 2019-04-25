@@ -41,7 +41,7 @@
     "awesome-typescript-loader": "5.2.1",
     "babel-core": "6.26.3",
     "babel-runtime": "6.26.0",
-    "husky": "2.0.0",
+    "husky": "2.1.0",
     "jest": "24.7.1",
     "lint-staged": "8.1.5",
     "prettier": "1.17.0",
